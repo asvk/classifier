@@ -1,5 +1,5 @@
 from keras import Model
-from keras.layers import Dense, Input, Dropout, Conv2D, LeakyReLU, Flatten
+from keras.layers import Dense, Input, Dropout, Conv2D, LeakyReLU, Flatten, GlobalAveragePooling2D
 from keras.utils import plot_model
 
 
@@ -11,11 +11,11 @@ def simple_model(image_shape: tuple = (84, 200, 3)):
     :return: keras model instance
     """
     input_image = Input(image_shape)
-    x = Conv2D(16, 3)(input_image)
+    x = Conv2D(32, 3)(input_image)
     x = LeakyReLU(0.2)(x)
-    x = Conv2D(32, 3)(x)
+    x = Conv2D(128, 3)(x)
     x = LeakyReLU(0.2)(x)
-    x = Flatten()(x)
+    x = GlobalAveragePooling2D()(x)
 
     x = Dense(20, activation='relu')(x)
     x = Dense(20, activation='relu')(x)
