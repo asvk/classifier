@@ -1,5 +1,6 @@
 from keras import Model
 from keras.layers import Dense, Input, Dropout, Conv2D, LeakyReLU, Flatten, GlobalAveragePooling2D
+from keras.optimizers import Adam
 from keras.utils import plot_model
 
 
@@ -24,7 +25,7 @@ def simple_model(image_shape: tuple = (84, 200, 3)):
 
     m = Model(inputs=input_image, outputs=x)
 
-    optimizer = 'adam'
+    optimizer = Adam(lr=1e-5)
     m.compile(optimizer, 'binary_crossentropy', metrics=['accuracy'])
 
     return m
